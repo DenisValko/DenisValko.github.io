@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-    max-width: 2200px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -268,7 +268,7 @@ background-image:url("../images/order_bg.png");
     border: 1px solid #353535;
     background:#211A16;
     margin-top: 60px;
-    max-width: 426px;
+    max-width: 826px;
     box-sizing: border-box;
     padding: 60px 40px;
     margin-left: 674px;
