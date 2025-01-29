@@ -4,7 +4,7 @@ div {
 }
 
 .alpha {
-    font size: 189px;
+    font-size: 189px;
     /*color: red;*/
     font-style: normal
 
@@ -28,14 +28,10 @@ hh
     padding: 0;
 }
 
-@font-face {
-    font-family: 'Gilroy';
-    src: url("../fonts/Gilroy-Semibold.ttf");
-}
 
 
 body {
-    background-color: #191411;
+    /*background-color: #191411;*/
     font-family: 'Gilroy', sans-serif;
     color: white;
 }
@@ -77,7 +73,6 @@ body {
 
 .main {
     overflow: hidden;
-    background-image: url("../images/main_bg.png");
     background-position: top center;
 }
 
@@ -176,7 +171,6 @@ body {
 }
 
 .why {
-    background-image: url("../images/whybg.png");
     background-position: top center;
     background-size: initial;
     padding-bottom: 180px;
@@ -206,7 +200,6 @@ body {
 }
 
 .products {
-    background-image: url("../images/burgers_bg.png");
     background-position: top center;
     background-size: 1400px;
     padding-bottom: 180px;
@@ -269,7 +262,7 @@ body {
 }
 
 .order{
-    background-image:url("../images/order_bg.png");
+
     background-position: top center;
     background-repeat: no-repeat;
     padding-bottom: 180px;
