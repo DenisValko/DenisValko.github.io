@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление попапами - Dev1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #034659;
+            color: white;
+            padding: 10px 20px;
+            height: 50px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            background-color: #00b2e3;
+            border-radius: 4px;
+            color: white;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        .nav-item.active {
+            background-color: #00839b;
+            border-radius: 5px;
+        }
+        .right-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .right-menu-item {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .main-container {
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: white;
+            height: calc(100vh - 50px);
+            border-right: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .toggle-switch {
+            margin: 10px 20px;
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #00b75a;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        .sidebar-menu-item {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .sidebar-menu-item.active {
+            background-color: #eaf8f8;
+            color: #00b2e3;
+            border-left: 3px solid #00b2e3;
+        }
+        .sidebar-menu-item:hover {
+            background-color: #f5f5f5;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .action-buttons {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #00b75a;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .tab.active {
+            color: #00b75a;
+            border-bottom: 2px solid #00b75a;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .filter-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        .filter-btn.active {
+            background-color: #00b2e3;
+            color: white;
+        }
+        .filter-text {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .filter-text a {
+            color: #00b2e3;
+            text-decoration: none;
+        }
+        .popup-list {
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .popup-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .popup-icon {
+            color: #00b2e3;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .popup-title {
+            font-weight: bold;
+        }
+        .popup-description {
+            color: #666;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .popup-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .preview-section {
+            margin-top: 20px;
+        }
+        .preview-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .preview-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .preview-tab.active {
+            color: #00b75a;
+            border-bottom: 2px solid #00b75a;
+        }
+        .preview-content {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="logo">
+        <div class="logo-icon">+</div>
+    </div>
+    <div class="nav">
+        <a href="#" class="nav-item">Рассылки</a>
+        <a href="#" class="nav-item">Automation</a>
+        <a href="#" class="nav-item">Чат-боты</a>
+        <a href="#" class="nav-item">CRM</a>
+        <a href="#" class="nav-item">Сайты</a>
+        <a href="#" class="nav-item active">Попапы</a>
+        <a href="#" class="nav-item">Push</a>
+        <a href="#" class="nav-item">SMTP</a>
+        <a href="#" class="nav-item">Курсы</a>
+    </div>
+    <div class="right-menu">
+        <a href="#" class="right-menu-item">
+            <span>Установить онлайн-чат</span>
+        </a>
+        <a href="#" class="right-menu-item">
+            <span>Отправить SMS</span>
+        </a>
+        <a href="#" class="right-menu-item">
+            <i class="notification-icon">🔔</i>
+        </a>
+        <div class="avatar">D</div>
+    </div>
+</div>
+<div class="main-container">
+    <div class="sidebar">
+        <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+        <div class="sidebar-menu-item">
+            <span>Главная</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>Проекты</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>dev2_2</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>Бургер_стейдж_...</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>popuptetst.stage.t...</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>front1_2</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>Dev2.html</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>Front2</span>
+        </div>
+        <div class="sidebar-menu-item">
+            <span>Dev3</span>
+        </div>
+        <div class="sidebar-menu-item active">
+            <span>Dev1</span>
+        </div>
+    </div>
+    <div class="content">
+        <h1 class="page-title">Dev1</h1>
+        <div class="action-buttons">
+            <button class="btn btn-primary">
+                <span>+</span> Добавить попап
+            </button>
+            <button class="btn btn-secondary">
+                Создать опрос
+            </button>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">Попапы</div>
+            <div class="tab">Цепочки</div>
+            <div class="tab">Аналитика</div>
+            <div class="tab">Настройки</div>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active">Все</button>
+            <button class="filter-btn">Перекрывающий</button>
+            <button class="filter-btn">Плавающий</button>
+            <button class="filter-btn">Горизонтальный</button>
+            <button class="filter-btn">С видео</button>
+            <button class="filter-btn">Модальное окно</button>
+        </div>
+
+        <div class="filter-text">
+            Отображать <a href="#">все</a> попапы
+        </div>
+
+        <div class="popup-list">
+            <div class="popup-item">
+                <div class="popup-left">
+                    <div style="display: flex; align-items: center;">
+                        <span class="popup-icon">📝</span>
+                        <span class="popup-title">popup 26-02 12:20:39</span>
+                    </div>
+                    <div class="popup-description">
+                        Всегда до взаимодействия с пользователем
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <span>0</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="popup-item">
+                <div class="popup-left">
+                    <div style="display: flex; align-items: center;">
+                        <span class="popup-icon">📝</span>
+                        <span class="popup-title">popup 21-02 11:48:42</span>
+                    </div>
+                    <div class="popup-description">
+                        Всегда до взаимодействия с пользователем
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <span>0</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="popup-item">
+                <div class="popup-left">
+                    <div style="display: flex; align-items: center;">
+                        <span class="popup-icon">🔳</span>
+                        <span class="popup-title">modal 21-02 10:50:40</span>
+                    </div>
+                    <div class="popup-description">
+                        Всегда до взаимодействия с пользователем
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <span>0</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <div class="preview-tabs">
+                <div class="preview-tab active">Превью</div>
+                <div class="preview-tab">Статистика</div>
+                <div class="preview-tab">Код для запуска вручную</div>
+            </div>
+            <div class="preview-content">
+                Здесь будет отображаться превью выбранного попапа
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
