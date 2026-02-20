@@ -11,11 +11,20 @@
 <body>
 	<meta name ="viewport" content="width=device-width, initial-scale=1">
 <!-- Форма с автоматической идентификацией -->
-<form>
+<form id="myForm">
   <input type="email" name="email" placeholder="Ваш email" required>
-  <input type="text" name="name" placeholder="Ваше имя">
+  <input type="text" name="name" placeholder="Ваше ім'я">
   <button type="submit">Отправить</button>
 </form>
+
+
+<script>
+  const form = document.getElementById('myForm');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); 
+  });
+</script>
 	<div  id="my_form">Римский император Константин I Великий по достоинству оценил выгодное местоположение приморского Византия, расположенного 
 		на стыке Европы и Азии. Кроме того, на решение Константина повлияла неспокойная обстановка в самом Риме: недовольство знати и постоянные
 		распри в борьбе за трон. Император хотел увенчать свою реформаторскую деятельность созданием нового административного центра огромной державы.
