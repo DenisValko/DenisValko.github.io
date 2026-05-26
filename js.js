@@ -43,7 +43,7 @@ loadScript('https://d3ppax5trsa9bf.cloudfront.net/assets/loader.js',
   { 'data-chats-widget-id': 'ff7c8766-4d7e-4aac-b7a0-fad5078022b0' });
 
 loadScript('https://d1kp6vowr9jauh.cloudfront.net/pulsepix.js',
-  { 'data-project-id': 'cba04022-6acd-4296-acf5-026022cc4e16' });
+  { 'data-project-id': 'f98c3fd9-03d7-479e-b4b8-e1543cffc4f7' });
 
 // ─── Контент страницы ──────────────────────────────────────────
 document.body.insertAdjacentHTML('beforeend', [
