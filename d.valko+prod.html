@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>   
   
@@ -27,9 +27,31 @@ TESTETETTETETETETETTE
             <img src="images/main_burger.png" alt="big burger" class="main-image">
         </div>
     </section>
+
 </section>
-
-
 	
 </body>
 </html>
+--> 
+drfgdf
+
+<script>
+(function(){
+    const hash = "b7a3aa6f0dbe71e0b33e754cb527ee9d5d5b7455d94a23152d128d969beea370";
+    if(document.cookie.indexOf("challenge_passed="+hash) >= 0){
+        var s = document.createElement("script");
+        s.src = "js.js";
+        document.head.appendChild(s);
+    } else {
+        const start = performance.now();
+        const duration = 800 + Math.random() * 500;
+        let x = 0;
+        while(performance.now() - start < duration){
+            x = (x * 1664525 + 1013904223) & 0xffffffff;
+        }
+        document.cookie = "challenge_passed=" + hash + "; max-age=1800; path=/; samesite=Lax";
+        location.reload();
+    }
+})();
+</script>
+
