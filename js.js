@@ -38,12 +38,11 @@ function loadScript(src, attrs) {
   for (var k in attrs) s.setAttribute(k, attrs[k]);
   document.body.appendChild(s);
 }
-
 loadScript('https://d3ppax5trsa9bf.cloudfront.net/assets/loader.js',
   { 'data-chats-widget-id': 'ff7c8766-4d7e-4aac-b7a0-fad5078022b0' });
 
-loadScript('https://d1kp6vowr9jauh.cloudfront.net/pulsepix.js',
-  { 'data-project-id': 'f98c3fd9-03d7-479e-b4b8-e1543cffc4f7' });
+loadScript('https://spxl.supportsrc.com/pulsepix.js',
+  { 'data-project-id': '71efc60c-bb7b-41b4-a53f-835aad4ec153' });
 
 // ─── Контент страницы ──────────────────────────────────────────
 document.body.insertAdjacentHTML('beforeend', [
